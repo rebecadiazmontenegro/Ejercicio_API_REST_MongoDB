@@ -17,10 +17,11 @@
   },
   "homepage": "https://github.com/JavierEspinosaP/Ejercicio_API_REST_MongoDB#readme",
   "dependencies": {
+    "cowsay": "^1.6.0",
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
-    "mongoose": "^8.16.4",
-    "cowsay": "^1.6.0"
+    "install": "^0.13.0",
+    "mongoose": "^8.16.4"
   },
   "devDependencies": {
     "morgan": "^1.10.0",
