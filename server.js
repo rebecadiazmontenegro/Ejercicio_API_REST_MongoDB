@@ -6,20 +6,16 @@ const port = 3000; //Puerto de pruebas
 //Para leer el fichero
 require("dotenv").config();
 
-
 //Middlewares
 const error404 = require("./middlewares/error404");
 //Morgan
 const morgan = require("./middlewares/morgan")
 
-
 // Configuración del logger con Morgan
 app.use(morgan(':method :url :status :param[id] - :response-time ms :body'));
 
-
 // Habilitar recepción de JSON por mi backend
 app.use(express.json());//Esto es un middleware
-
 
 // Rutas: Habilita el fichero que hemos creado
 const productsRoutes = require("./routes/products.routes.js");
@@ -33,9 +29,10 @@ app.get("/", (request, response) => {
 });
 
 
-// API: Usar las rutas definidas en books.routes.js
+// API: Usar las rutas definidas 
 app.use('/api/products',productsRoutes);
-app.use('/api/entries',providerRoutes);
+app.use('/api/provider',providerRoutes);
+// app.use('/api/entries',productsRoutesRoutes);
 
 app.use(error404); // Manejo de rutras no encontradas
 
