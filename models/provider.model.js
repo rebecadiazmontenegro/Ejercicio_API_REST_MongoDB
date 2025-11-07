@@ -46,36 +46,7 @@ const providerSchema = mongoose.Schema(objectSchema);
 // Crear el modelo
 const Provider = mongoose.model("Provider", providerSchema);
 
-async function saveProvider(company_name, cif, adress, url_web) {
-  try {
-    // Comprobar si ya existe un proveedor con ese nombre de empresa
-    const existingProvider = await Provider.findOne({ company_name });
-    if (existingProvider) {
-      console.log("Este proveedor ya existe en la base de datos.");
-      return existingProvider; // o lanza un error si prefieres
-    }
-
-    // Crear una nueva instancia del proveedor
-    const provider = new Provider({
-      company_name,
-      cif,
-      adress,
-      url_web,
-    });
-
-    // Guardar el proveedor en la base de datos
-    const result = await provider.save();
-    console.log(result);
-    return result;
-  } catch (error) {
-    console.error("Error al guardar el proveedor:", error.message);
-  }
-}
-
-module.exports = {
-  Provider,
-  saveProvider,
-};
+module.exports = Provider;
 
 // ---------------------------------------------------------------------------------------------
 

@@ -1,10 +1,10 @@
-const providerController = require('../controllers/provider.controllers');
-const router = require('express').Router();
+const providerController = require("../controllers/provider.controllers");
+const router = require("express").Router();
 
 // GET http://localhost:3000/api/provider
 // GET http://localhost:3000/api/provider/id
 
-router.get("{/:id}", providerController.getProvider);
+router.get("{/:cif}", providerController.getProvider);
 
 // POST http://localhost:3000/api/products
 /*
@@ -16,9 +16,8 @@ A enviar por body como ejemplo:
     "url_web": "https://www.plantitas.com"
 }
 */
+
 router.post("/", providerController.createProvider);
-
-
 
 // //PUT http://localhost:3000/api/products
 /*
@@ -36,7 +35,5 @@ router.put("/", providerController.editProvider);
 // //DELETE http://localhost:3000/api/products
 
 router.delete("/", providerController.deleteProvider);
-
-
 
 module.exports = router;

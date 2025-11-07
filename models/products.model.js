@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const Provider = require("./provider.model");
 require("../config/db_mongo"); // Conexión a BBDD MongoDB
 
 const objectSchema = {
@@ -34,27 +33,7 @@ const productSchema = mongoose.Schema(objectSchema);
 // Crear el modelo --> Colección
 const Product = mongoose.model("Product", productSchema);
 
-// Crear juego pasando titulo + nombre de compañía por parámetro
-async function saveProduct(id, title, price, description, company_name) {
-  const provider = await Provider.find({ company_name });
-  const provider_id = provider[0]._id.toString();
-
-  const product = new Product({
-    id,
-    title,
-    price,
-    description,
-    provider: provider_id,
-  });
-
-  const result = await product.save();
-  console.log(result);
-}
-
-module.exports = {
-  Product,
-  saveProduct,
-}; // Exportar el modelo y la función para crear productos
+module.exports = Product;
 
 //--------------------------------------------------------------------------
 
