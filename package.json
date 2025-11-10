@@ -4,7 +4,7 @@
   "description": "Ejercicio para practicar API REST con base de datos MongoDB",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "nodemon server.js"
   },
   "repository": {
@@ -22,9 +22,11 @@
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
     "install": "^0.13.0",
-    "mongoose": "^8.16.4"
+    "mongoose": "^8.16.4",
+    "supertest": "^7.1.4"
   },
   "devDependencies": {
+    "jest": "^30.2.0",
     "morgan": "^1.10.0",
     "nodemon": "^3.1.10"
   }

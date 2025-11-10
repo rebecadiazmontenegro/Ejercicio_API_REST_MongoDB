@@ -6,9 +6,9 @@ const getProductsService = async (id) => {
   try {
     const filter = id ? { id } : {};
     const products = await Product.find(filter, "-_id -__v").populate("provider", "-_id -__v");
-    return { success: true, data: products };
+    return products ;
   } catch (error) {
-    return { success: false, message: "Error al obtener los productos", details: error.message };
+    return { message: "Error al obtener los productos", details: error.message };
   }
 };
 
@@ -17,7 +17,7 @@ async function createProductService({ id, title, price, description, company_nam
   try {
     const provider = await Provider.findOne({ company_name });
     if (!provider) {
-      return { success: false, message: `Proveedor '${company_name}' no encontrado` };
+      return { message: `Proveedor '${company_name}' no encontrado` };
     }
 
     const newProduct = new Product({
@@ -29,9 +29,9 @@ async function createProductService({ id, title, price, description, company_nam
     });
 
     const savedProduct = await newProduct.save();
-    return { success: true, data: savedProduct };
+    return savedProduct;
   } catch (error) {
-    return { success: false, message: "Error al crear el producto", details: error.message };
+    return { message: "Error al crear el producto", details: error.message };
   }
 }
 
@@ -45,7 +45,7 @@ async function editProductService({ id, title, price, description, company_name 
     if (company_name) {
       const provider = await Provider.findOne({ company_name });
       if (!provider)
-        return { success: false, message: `Proveedor '${company_name}' no encontrado` };
+        return { message: `Proveedor '${company_name}' no encontrado` };
       provider_id = provider._id;
     }
 
@@ -55,9 +55,9 @@ async function editProductService({ id, title, price, description, company_name 
     product.provider = provider_id;
 
     const updated = await product.save();
-    return { success: true, data: updated };
+    return updated;
   } catch (error) {
-    return { success: false, message: "Error al editar el producto", details: error.message };
+    return { message: "Error al editar el producto", details: error.message };
   }
 }
 
@@ -66,11 +66,11 @@ async function deleteProductService(title) {
   try {
     const result = await Product.deleteOne({ title });
     if (result.deletedCount === 0) {
-      return { success: false, message: `No se encontró producto con título '${title}'` };
+      return { message: `No se encontró producto con título '${title}'` };
     }
-    return { success: true, message: `Producto '${title}' eliminado` };
+    return { message: `Producto '${title}' eliminado` };
   } catch (error) {
-    return { success: false, message: "Error al eliminar el producto", details: error.message };
+    return { message: "Error al eliminar el producto", details: error.message };
   }
 }
 

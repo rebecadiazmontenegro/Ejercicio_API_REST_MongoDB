@@ -7,9 +7,9 @@ const port = 3000; //Puerto de pruebas
 require("dotenv").config();
 
 //Middlewares
-const error404 = require("./middlewares/error404");
+const error404 = require("./demos_backend/middlewares/error404");
 //Morgan
-const morgan = require("./middlewares/morgan")
+const morgan = require("./demos_backend/middlewares/morgan")
 
 // Configuración del logger con Morgan
 app.use(morgan(':method :url :status :param[id] - :response-time ms :body'));
@@ -18,8 +18,8 @@ app.use(morgan(':method :url :status :param[id] - :response-time ms :body'));
 app.use(express.json());//Esto es un middleware
 
 // Rutas: Habilita el fichero que hemos creado
-const productsRoutes = require("./routes/products.routes.js");
-const providerRoutes = require("./routes/providers.routes.js");
+const productsRoutes = require("./demos_backend/routes/products.routes.js");
+const providerRoutes = require("./demos_backend/routes/providers.routes.js");
 
 
 // http://localhost:3000/
@@ -42,6 +42,5 @@ app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`);
 });
 
-
-
+module.exports = app; // Exportar la app para usarla en tests
 
