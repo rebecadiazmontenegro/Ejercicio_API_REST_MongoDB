@@ -68,10 +68,11 @@ describe("GET one product", () => {
 
 describe("POST one product", () => {
   it("debería guardar un producto válido", async () => {
+    const newId = Math.floor(Math.random() * 10000);
     const response = await request
       .post("/api/products")
       .send({
-        id: 13,
+        id: newId,
         title: "Cervezas Miércoles TB " + Math.random(),
         price: 10,
         description: "Vente de tarde y conoce a DS,FS,CYB,DevOps,UXUI,MKT",

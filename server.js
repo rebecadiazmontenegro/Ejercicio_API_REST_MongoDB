@@ -43,4 +43,3 @@ app.listen(port, () => {
 });
 
 module.exports = app; // Exportar la app para usarla en tests
-
