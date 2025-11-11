@@ -76,7 +76,7 @@ describe("POST one product", () => {
         title: "Cervezas Miércoles TB " + Math.random(),
         price: 10,
         description: "Vente de tarde y conoce a DS,FS,CYB,DevOps,UXUI,MKT",
-        company_name: "La casa de las flores", // campo correcto
+        company_name: "El hogar el gnomo", // campo correcto
       })
       .set("Accept", "application/json")
       .expect("Content-Type", /json/)
