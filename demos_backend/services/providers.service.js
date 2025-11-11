@@ -7,7 +7,7 @@ const getProviderService = async (cif) => {
   try {
     const filter = cif ? { cif } : {}; // Si tiene id devulve el del id sino devuelve todos
     const providers = await Provider.find(filter, "-_id -__v");
-    return providers
+    return providers;
   } catch (error) {
     return {
       message: "Error al obtener los proovedores",
@@ -21,23 +21,26 @@ const getProviderService = async (cif) => {
 async function createProviderService({ company_name, cif, adress, url_web }) {
   try {
     const existingProvider = await Provider.findOne({ company_name });
+
     if (existingProvider) {
       return {
+        exists: true,
         message: `El proveedor '${company_name}' ya existe`,
       };
     }
 
-    const newProvider = new Provider({
-      company_name,
-      cif,
-      adress,
-      url_web,
+    const newProvider = new Provider({ 
+      company_name, 
+      cif, 
+      adress, 
+      url_web 
     });
-
     const savedProvider = await newProvider.save();
-    return savedProvider;
+
+    return { exists: false, provider: savedProvider };
   } catch (error) {
     return {
+      exists: false,
       message: "Error al crear el proveedor",
       details: error.message,
     };
@@ -100,5 +103,5 @@ module.exports = {
   getProviderService,
   createProviderService,
   editProviderService,
-  deleteProviderService
+  deleteProviderService,
 };

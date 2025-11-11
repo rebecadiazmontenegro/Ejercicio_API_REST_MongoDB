@@ -13,27 +13,32 @@ const getProductsService = async (id) => {
 };
 
 // POST http://localhost:3000/api/products
+// Servicio
 async function createProductService({ id, title, price, description, company_name }) {
+  const provider = await Provider.findOne({ company_name });
+  if (!provider) {
+    return { error: true, message: `Proveedor '${company_name}' no encontrado` };
+  }
+
+  const newProduct = new Product({
+    id,
+    title,
+    price,
+    description,
+    provider: provider._id,
+  });
+
   try {
-    const provider = await Provider.findOne({ company_name });
-    if (!provider) {
-      return { message: `Proveedor '${company_name}' no encontrado` };
-    }
-
-    const newProduct = new Product({
-      id,
-      title,
-      price,
-      description,
-      provider: provider._id,
-    });
-
     const savedProduct = await newProduct.save();
-    return savedProduct;
+    return { error: false, product: savedProduct };
   } catch (error) {
-    return { message: "Error al crear el producto", details: error.message };
+    if (error.code === 11000) { // Error de duplicado
+      return { error: true, message: `El producto con '${id}' ya existe` };
+    }
+    return { error: true, message: "Error al crear el producto", details: error.message };
   }
 }
+
 
 // PUT http://localhost:3000/api/products
 async function editProductService({ id, title, price, description, company_name }) {

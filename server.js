@@ -31,7 +31,7 @@ app.get("/", (request, response) => {
 
 // API: Usar las rutas definidas 
 app.use('/api/products',productsRoutes);
-app.use('/api/provider',providerRoutes);
+app.use('/api/providers',providerRoutes);
 // app.use('/api/entries',productsRoutesRoutes);
 
 app.use(error404); // Manejo de rutras no encontradas

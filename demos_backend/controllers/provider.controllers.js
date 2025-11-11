@@ -18,6 +18,7 @@ const getProvider = async (req, res) => {
 };
 
 // POST http://localhost:3000/api/providers
+
 const createProvider = async (req, res) => {
   try {
     const { company_name, cif, adress, url_web } = req.body;
@@ -33,13 +34,17 @@ const createProvider = async (req, res) => {
       url_web,
     });
 
-    res.status(201).json({
-      message: `Proveedor '${result.data.company_name}' creado.`,
-      provider: result.data,
+    if (result.exists) {
+      return res.status(400).json({ msj: result.message });
+    }
+
+    return res.status(201).json({
+      message: "Proveedor creado.",
+      provider: result.provider,
     });
   } catch (error) {
     console.error(error);
-    res.status(400).json({ msj: error.message });
+    return res.status(400).json({ msj: error.message });
   }
 };
 
@@ -50,7 +55,7 @@ const editProvider = async (req, res) => {
     const updatedProvider = await editProviderService(req.body);
 
     res.status(200).json({
-      message: `Proveedor actualizado: ${cif}.`,
+      message: `Proveedor actualizado: ${updatedProvider.company_name}.`,
       provider: updatedProvider,
     });
   } catch (error) {

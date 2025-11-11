@@ -1,12 +1,12 @@
 const providerController = require("../controllers/provider.controllers");
 const router = require("express").Router();
 
-// GET http://localhost:3000/api/provider
-// GET http://localhost:3000/api/provider/id
+// GET http://localhost:3000/api/providers
+// GET http://localhost:3000/api/providers/id
 
 router.get("{/:cif}", providerController.getProvider);
 
-// POST http://localhost:3000/api/products
+// POST http://localhost:3000/api/providers
 /*
 A enviar por body como ejemplo:
 {
@@ -19,7 +19,7 @@ A enviar por body como ejemplo:
 
 router.post("/", providerController.createProvider);
 
-// //PUT http://localhost:3000/api/products
+// //PUT http://localhost:3000/api/providers
 /*
 A enviar por body como ejemplo:
 {
@@ -32,7 +32,7 @@ A enviar por body como ejemplo:
 
 router.put("/", providerController.editProvider);
 
-// //DELETE http://localhost:3000/api/products
+// //DELETE http://localhost:3000/api/providers
 
 router.delete("/", providerController.deleteProvider);
 

@@ -20,27 +20,25 @@ const getProduct = async (req, res) => {
 // // POST http://localhost:3000/api/products
 
 const createProduct = async (req, res) => {
-  try {
-    const { id, title, price, description, company_name } = req.body;
-    if (!title || !price || !description || !company_name) {
-      return res.status(400).json({ msj: "Faltan datos obligatorios" });
-    }
-    const product = await createProductService({
-      id,
-      title,
-      price,
-      description,
-      company_name,
-    });
-    res.status(201).json({
-      message: `Producto '${product.title}' creado`,
-      product: product,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(400).json({ msj: error.message });
+  const { id, title, price, description, company_name } = req.body;
+  if (!title || !price || !description || !company_name) {
+    return res.status(400).json({ msj: "Faltan datos obligatorios" });
   }
+
+  const result = await createProductService({ id, title, price, description, company_name });
+
+  if (result.error) {
+    // Devuelve 400 si hubo error
+    return res.status(400).json({ msj: result.message });
+  }
+
+  // Solo entra aquí si se creó correctamente
+  res.status(201).json({
+    message: `Producto '${result.product.title}' creado`,
+    product: result.product,
+  });
 };
+
 
 // PUT http://localhost:3000/api/products
 

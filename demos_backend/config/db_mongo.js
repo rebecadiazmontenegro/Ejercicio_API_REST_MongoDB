@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 require('dotenv').config();
 
-//mongoose.connect(process.env.MY_MONGO_URI || "mongodb://localhost:27017/local");
-mongoose.connect("mongodb://localhost:27017/local");
+mongoose.connect(process.env.MY_MONGO_URI || "mongodb://localhost:27017/local");
+//mongoose.connect("mongodb://localhost:27017/local");
 const db = mongoose.connection;
 
 // Eventos
