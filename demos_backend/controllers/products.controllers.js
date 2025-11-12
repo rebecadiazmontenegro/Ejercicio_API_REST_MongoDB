@@ -6,6 +6,7 @@ const {
 } = require("../services/products.service");
 
 // GET http://localhost:3000/api/products
+
 const getProduct = async (req, res) => {
   try {
     const id = req.params.id;
